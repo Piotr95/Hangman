@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QTextEdit>
-
+#include"word.h"
 namespace Ui {
 class MainWindow;
 }
@@ -15,8 +15,10 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-     void addLetters(int size_off_word);
+       QTextEdit** initfields(int size_off_word);
      void decorate(QTextEdit* TE);
+     void addLetters();
+     Word choseword(string path);
 private slots:
     void on_Wybierz_clicked();
 
