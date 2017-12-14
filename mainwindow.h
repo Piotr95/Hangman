@@ -18,7 +18,7 @@ public:
        QTextEdit** initfields(int size_off_word);
      void decorate(QTextEdit* TE);
      void addLetters();
-     Word choseword(string path);
+     Word choseword(QString path);
 private slots:
     void on_Wybierz_clicked();
 

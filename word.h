@@ -1,20 +1,20 @@
 #ifndef WORD_H
 #define WORD_H
 #include<string>
-#include<vector>
+#include<QString>
 using namespace std;
 
 class Word
 {
-public:
-  string clue;
-  string word;
+private:
+  QString clue;
+  QString word;
 
 
 public:
-    Word(string clue, string word);
-    string GetWord();
-    string GetClue();
+    Word(QString clue, QString word);
+    QString GetWord();
+    QString GetClue();
 
 
 };

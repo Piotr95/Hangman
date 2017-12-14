@@ -2,17 +2,18 @@
 #include<vector>
 #include<string>
 #include <fstream>
+#include<QString>
 using namespace std;
-Word::Word(string clue,string word)
+Word::Word(QString clue,QString word)
 {
 this->clue=clue;
 this->word=word;
 }
-string Word::GetWord()
+QString Word::GetWord()
 {
   return this-> word;
 }
-string Word:: GetClue()
+QString Word:: GetClue()
 {
   return this-> clue;
 }
