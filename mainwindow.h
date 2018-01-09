@@ -18,9 +18,16 @@ public:
     ~MainWindow();
        QTextEdit** initfields(int size_off_word);
      void decorate(QTextEdit* TE);
-     void addLetters();
+     QTextEdit**addLetters();
+     void Setwords(QTextEdit** words);
+     QTextEdit** Getwords();
      Word choseword(QString path);
      void setLine(QLineEdit * Line);
+     void guess(QString Text);
+     void random_word();
+     Word* Getword();
+     int*Find_letters(QString k);
+
 private slots:
     void on_Wybierz_clicked();
     void keyboardHandler();
@@ -32,9 +39,11 @@ private slots:
 
 
 private:
+    Word *currentword;
     Ui::MainWindow *ui;
     QString outputText;
     QLineEdit *Line;
+    QTextEdit** words;
 
 };
 

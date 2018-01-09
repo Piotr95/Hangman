@@ -12,6 +12,7 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
+
 {
     ui->setupUi(this);
 
@@ -63,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent) :
     outputText = "";
     ui->Line->setFocus();
 
-
+       random_word();
 
 
 
@@ -71,6 +72,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 }
+
+void MainWindow::random_word()
+{
+    this->currentword=new Word( choseword("Dictionary.txt"));
+}
+
+Word* MainWindow::Getword()
+{
+ return this->currentword;
+}
+
 
 
 void MainWindow::keyboardHandler()
@@ -126,8 +138,12 @@ void MainWindow::on_Benter_clicked()
 {
 if(outputText.size()>0)
 {
+
     ui->System->append("You entered :  \n"+outputText);
+    guess(outputText);
     outputText="";
+
+
 }
 }
 
@@ -157,7 +173,6 @@ void MainWindow::decorate(QTextEdit *TE)
 
  TE->setReadOnly(true);
  TE->setMaximumSize(31,42);
- TE->setPlaceholderText("D");
  TE->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
  TE->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
  TE->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -185,37 +200,84 @@ QTextEdit** MainWindow::initfields( int size_off_word)
      return words;
 
 }
+void::MainWindow::Setwords(QTextEdit** words)
+{
+    this->words=words;
+}
+
+QTextEdit**::MainWindow::Getwords()
+{
+    return this->words;
+}
 
 
 Word MainWindow::choseword(QString path)
 {
     Filemanager *f= new Filemanager();
     vector<Word>w=f->ReadFromDictionary(path);
-   //int randomizer=rand()%w.size();
+   int randomizer=rand()%w.size();
 
 
-    return w[w.size()-1];
+    return w[randomizer];
 }
 
-void MainWindow:: addLetters()
+ QTextEdit** MainWindow:: addLetters()
 {
 
-     Word initWords=choseword("Dictionary.txt");
-       QTextEdit** words =initfields(initWords.GetWord().size());
+
+       QTextEdit** temp_words =initfields(currentword->GetWord().size());
+       Setwords(temp_words);
 
 
 
 
 
-    ui->label->setText( initWords.GetClue() ) ;
-
-     }
+    ui->label->setText( currentword->GetClue() ) ;
 
 
+ }
+
+ int* MainWindow::Find_letters(QString k)
+ {
+
+
+ }
 
 
 
 
+void MainWindow:: guess(QString Text)
+{
+ QTextEdit** temp_words=Getwords();
+ Word* W=Getword();
+
+   QString current_guess_word=W->GetWord();
+
+
+
+
+   if(Text.length()>1)
+   {
+    if(current_guess_word.toLower()==Text.toLower() )
+    {
+        ui->System->append("You Win :  \n");
+    }
+    else
+           ui->System->append("Ii is diffrent  word try again :  \n");
+   }
+   else
+   {
+       if(current_guess_word.contains(Text.toLower()))
+       {
+
+       }
+       else
+       {
+        ui->System->append(" Word don't contains this letters try again :  \n");
+       }
+   }
+
+}
 
 MainWindow::~MainWindow()
 {
