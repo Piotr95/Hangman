@@ -27,7 +27,11 @@ public:
      void random_word();
      Word* Getword();
      int*Find_letters(QString k);
-
+     void EndGame();
+     void NewGame();
+     void Clear_Word_field();
+     void Reset_Text_Board();
+     void Decorate_Text_Box();
 private slots:
     void on_Wybierz_clicked();
     void keyboardHandler();
@@ -44,6 +48,7 @@ private:
     QString outputText;
     QLineEdit *Line;
     QTextEdit** words;
+    bool Win;
 
 };
 

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Wybierz</string>
+     <string>New Game</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView">
@@ -59,7 +59,7 @@
       <height>89</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="HorizontalLayout"/>
+    <layout class="QHBoxLayout" name="word_field"/>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
@@ -826,7 +826,7 @@ background-color: rgb(255, 255, 255);</string>
      </item>
     </layout>
    </widget>
-   <widget class="QTextBrowser" name="System">
+   <widget class="QTextBrowser" name="Text_Board">
     <property name="geometry">
      <rect>
       <x>340</x>

@@ -38,4 +38,8 @@ FORMS += \
         mainwindow.ui
 
 DISTFILES += \
+    Dictionary.txt \
     Dictionary.txt
+
+RESOURCES += \
+    game_resources.qrc

@@ -11,7 +11,7 @@ class Filemanager
 {
 public:
     Filemanager();
-    vector<Word>ReadFromDictionary(QString path);
+    vector<Word>ReadFromDictionary();
 };
 
 #endif // FILEMANAGER_H
