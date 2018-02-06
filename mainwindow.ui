@@ -839,13 +839,24 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>30</x>
       <y>90</y>
-      <width>311</width>
+      <width>241</width>
       <height>191</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>303</x>
+      <y>90</y>
+      <width>41</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="PB"/>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">

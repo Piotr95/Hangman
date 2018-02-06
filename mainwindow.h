@@ -6,6 +6,7 @@
 #include"word.h"
 #include<QLineEdit>
 #include<QPixmap>
+#include<QProgressBar>
 namespace Ui {
 class MainWindow;
 }
@@ -42,6 +43,9 @@ public:
     void CheckGameWin();
     void WinGame();
     void CheckGameOver();
+    void initProgressbar();
+    void Clear_ProgressBar();
+    void decrProgressbar();
 private slots:
     void keyboardHandler();
     void Bclear_clicked();
@@ -57,6 +61,7 @@ private:
     QTextEdit** words;
     QPixmap **hangman_steps;
     QString temporary_word;
+    QProgressBar* health_points;
     int failed_attemps;
 
     bool win;

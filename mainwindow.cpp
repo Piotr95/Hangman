@@ -10,6 +10,7 @@
 #include<QDebug>
 #include<cstdlib>
 #include<QPixmap>
+#include <QProgressBar>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -242,13 +243,16 @@ void MainWindow::NewGame()
 {
     Clear_Word_field();
     Reset_Text_Board();
+    Clear_ProgressBar();
     random_word();
     addLetters();
+
     win=false;
     over=false;
     Normal_lvl();
+    initProgressbar();
     ui->label_2->setPixmap(QString::fromStdString(":Hpic/normal_lvl/H"+to_string(7-failed_attemps)+".png"));
-    //SetNextHangmanImage();
+
 
 }
 
@@ -267,6 +271,18 @@ void MainWindow::Clear_Word_field()
     if (ui->word_field) {
         while(ui->word_field->count() > 0){
             QLayoutItem *item = ui->word_field->takeAt(0);
+            QWidget* widget = item->widget();
+            if(widget)
+                delete widget;
+            delete item;
+        }
+    }
+}
+void MainWindow::Clear_ProgressBar()
+{
+    if (ui->PB) {
+        while(ui->PB->count() > 0){
+            QLayoutItem *item = ui->PB->takeAt(0);
             QWidget* widget = item->widget();
             if(widget)
                 delete widget;
@@ -372,7 +388,9 @@ void MainWindow::failed_attempt()
 {
     failed_attemps-=1;
     SetNextHangmanImage();
+    decrProgressbar();
 }
+
 
 void MainWindow:: CheckGameOver()
 {
@@ -386,7 +404,34 @@ void MainWindow:: CheckGameOver()
     }
 
 }
+
+
 void MainWindow::GameOver()
 {
     ui->Text_Board->append("Game Over :(  \n");
 }
+
+
+void MainWindow::initProgressbar()
+{
+    health_points=new QProgressBar;
+
+     health_points->setOrientation(Qt::Vertical);
+     health_points->setTextDirection(QProgressBar::BottomToTop);
+     qDebug()<<failed_attemps;
+     health_points->setRange(0, failed_attemps);
+     health_points->setValue(failed_attemps);
+     health_points->setTextVisible(false);
+     health_points->setStyleSheet("::chunk {""background-color: red}");
+     ui->PB->insertWidget(0,health_points);
+}
+
+void MainWindow::decrProgressbar()
+{
+
+ health_points->setValue(failed_attemps);
+
+
+}
+
+
