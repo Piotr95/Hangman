@@ -3,17 +3,23 @@
 #include<string>
 #include <fstream>
 #include<QString>
+
 using namespace std;
+
 Word::Word(QString clue,QString word)
 {
-this->clue=clue;
-this->word=word;
+    this->clue=clue;
+    this->word=word;
 }
+
+
 QString Word::GetWord()
 {
-  return this-> word;
+    return this-> word;
 }
+
+
 QString Word:: GetClue()
 {
-  return this-> clue;
+    return this-> clue;
 }

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>749</width>
+    <width>709</width>
     <height>826</height>
    </rect>
   </property>
@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="Wybierz">
+   <widget class="QPushButton" name="BNew">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -25,16 +25,6 @@
     </property>
     <property name="text">
      <string>New Game</string>
-    </property>
-   </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>90</y>
-      <width>301</width>
-      <height>192</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -72,7 +62,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLineEdit" name="Line">
+      <widget class="QLineEdit" name="line">
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
 background-color: rgb(255, 255, 255);</string>
@@ -844,16 +834,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Enter your guess letter:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>749</width>
-     <height>26</height>
-    </rect>
-   </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>90</y>
+      <width>311</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -864,6 +857,22 @@ p, li { white-space: pre-wrap; }
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>709</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDupa">
+    <property name="title">
+     <string>Dupa</string>
+    </property>
+   </widget>
+   <addaction name="menuDupa"/>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

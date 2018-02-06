@@ -2,5 +2,13 @@
     <qresource prefix="/\Words"/>
     <qresource prefix="/">
         <file>Words/Dictionary.txt</file>
+        <file>Hpic/normal_lvl/H0.png</file>
+        <file>Hpic/normal_lvl/H1.png</file>
+        <file>Hpic/normal_lvl/H2.png</file>
+        <file>Hpic/normal_lvl/H3.png</file>
+        <file>Hpic/normal_lvl/H4.png</file>
+        <file>Hpic/normal_lvl/H5.png</file>
+        <file>Hpic/normal_lvl/H6.png</file>
+        <file>Hpic/normal_lvl/H7.png</file>
     </qresource>
 </RCC>

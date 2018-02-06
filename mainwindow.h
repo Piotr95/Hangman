@@ -5,6 +5,7 @@
 #include <QTextEdit>
 #include"word.h"
 #include<QLineEdit>
+#include<QPixmap>
 namespace Ui {
 class MainWindow;
 }
@@ -16,39 +17,50 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-       QTextEdit** initfields(int size_off_word);
-     void decorate(QTextEdit* TE);
-     QTextEdit**addLetters();
-     void Setwords(QTextEdit** words);
-     QTextEdit** Getwords();
-     Word choseword(QString path);
-     void setLine(QLineEdit * Line);
-     void guess(QString Text);
-     void random_word();
-     Word* Getword();
-     int*Find_letters(QString k);
-     void EndGame();
-     void NewGame();
-     void Clear_Word_field();
-     void Reset_Text_Board();
-     void Decorate_Text_Box();
+    QTextEdit** initfields(int size_off_word);
+    void SetNextHangmanImage();
+    void failed_attempt();
+    void decorate(QTextEdit* TE);
+    void addLetters();
+    void SetWordFields(QTextEdit** words);
+    QTextEdit** GetWordFields();
+    Word choseword();
+    void guess(QString Text);
+    void random_word();
+    Word* Getword();
+    int*Find_letters(QString k);
+    void GameOver();
+    void NewGame();
+    void Clear_Word_field();
+    void Reset_Text_Board();
+    void Decorate_Text_Box();
+    void Normal_lvl();
+    void SetHangmanSteps(QPixmap **steps);
+    QPixmap* load_Pic(QString path);
+    void InitTemporary();
+    void FillTemporary();
+    void CheckGameWin();
+    void WinGame();
+    void CheckGameOver();
 private slots:
-    void on_Wybierz_clicked();
     void keyboardHandler();
-    void on_clear_clicked();
-    void on_Benter_clicked();
-    void on_Bback_clicked();
-
-
-
+    void Bclear_clicked();
+    void Benter_clicked();
+    void Bback_clicked();
+    void NewGame_clicked();
 
 private:
     Word *currentword;
     Ui::MainWindow *ui;
     QString outputText;
-    QLineEdit *Line;
+    QLineEdit *line;
     QTextEdit** words;
-    bool Win;
+    QPixmap **hangman_steps;
+    QString temporary_word;
+    int failed_attemps;
+
+    bool win;
+    bool over;
 
 };
 
