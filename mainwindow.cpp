@@ -63,6 +63,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect ( ui->Benter, SIGNAL( clicked()), this, SLOT( Benter_clicked() ) );
     connect ( ui->Bclear, SIGNAL( clicked()), this, SLOT( Bclear_clicked() ) );
     connect ( ui->BNew, SIGNAL( clicked()), this, SLOT( NewGame_clicked() ) );
+    ui->Lvl->addItem("Easy");
+    ui->Lvl->addItem("Normal");
+    ui->Lvl->addItem("Hard");
     outputText = "";
     ui->line->setFocus();
     NewGame();

@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="BNew">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>380</x>
       <y>400</y>
       <width>93</width>
       <height>28</height>
@@ -857,6 +857,16 @@ p, li { white-space: pre-wrap; }
      </rect>
     </property>
     <layout class="QHBoxLayout" name="PB"/>
+   </widget>
+   <widget class="QComboBox" name="Lvl">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>400</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
