@@ -66,6 +66,7 @@ Game::Game(QWidget *parent) :
     connect ( ui->Benter, SIGNAL( clicked()), this, SLOT( Benter_clicked() ) );
     connect ( ui->Bclear, SIGNAL( clicked()), this, SLOT( Bclear_clicked() ) );
     connect ( ui->BNew, SIGNAL( clicked()), this, SLOT( NewGame_clicked() ) );
+    Game::setWindowTitle("Hangman created by Piotr Szczepaniak");
     ui->Lvl->addItem("Easy");
     ui->Lvl->addItem("Normal");
     ui->Lvl->addItem("Hard");
