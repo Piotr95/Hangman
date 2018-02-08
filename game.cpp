@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "Game.h"
 #include "ui_mainwindow.h"
 #include <iostream>
 #include <map>
@@ -11,11 +11,14 @@
 #include<cstdlib>
 #include<QPixmap>
 #include <QProgressBar>
+#include<easylvl.h>
+#include<normallvl.h>
+#include<hardlvl.h>
 
-MainWindow::MainWindow(QWidget *parent) :
+
+Game::Game(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
-
 {
     ui->setupUi(this);
 
@@ -66,23 +69,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Lvl->addItem("Easy");
     ui->Lvl->addItem("Normal");
     ui->Lvl->addItem("Hard");
+
     outputText = "";
     ui->line->setFocus();
     NewGame();
 }
 
-void MainWindow::random_word()
+void Game::random_word()
 {
-    this->currentword=new Word( choseword());
+   this->currentword=new Word( IT->choseword());
 }
 
 
-Word* MainWindow::Getword()
+Word* Game::Getword()
 {
  return this->currentword;
 }
 
-void MainWindow::keyboardHandler(){
+void Game::keyboardHandler(){
     QPushButton *B = (QPushButton *)sender();
     QString inputText = B->text();
     if (inputText == "Space"){
@@ -94,14 +98,14 @@ void MainWindow::keyboardHandler(){
     }
     ui->line->setText(outputText);
 }
-void MainWindow::Bclear_clicked()
+void Game::Bclear_clicked()
 {
     outputText="";
     ui->line->setText(outputText);
 }
 
 
-void MainWindow::Benter_clicked()
+void Game::Benter_clicked()
 {
     if(outputText.size()>0 && (!win)&&(!over))
     {
@@ -111,73 +115,59 @@ void MainWindow::Benter_clicked()
     }
 }
 
-void MainWindow::Bback_clicked()
+void Game::Bback_clicked()
 {
     outputText.remove(outputText.length()-1,outputText.length());
     ui->line->setText(outputText);
 }
 
 
-void MainWindow::decorate(QTextEdit *TE)
-{
- TE->setReadOnly(true);
- TE->setMaximumSize(31,42);
- TE->setMinimumSize(31,42);
- TE->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
- TE->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
- TE->setGeometry(148,42,944,494);
- TE->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600;\">_</span></p></body></html>", Q_NULLPTR));
-}
 
 
-QTextEdit** MainWindow::initfields( int size_off_word)
-{
-     QTextEdit** words = new QTextEdit*[size_off_word];
-     for( int i=0;i<size_off_word;i++)
-     {
-        words[i]=new QTextEdit();
-        decorate(words[i]);
-        words[i]->show();
-        ui->word_field->addWidget(words[i]);
-     }
-     return words;
-}
+//QTextEdit** Game::initfields( int size_off_word)
+//{
+//     QTextEdit** words = new QTextEdit*[size_off_word];
+//     for( int i=0;i<size_off_word;i++)
+//     {
+//        words[i]=new QTextEdit();
+//        DE->decorateLetter(words[i]);
+//        words[i]->show();
+//        ui->word_field->addWidget(words[i]);
+//     }
+//     return words;
+//}
 
 
-void::MainWindow::SetWordFields(QTextEdit** words)
+void::Game::SetWordFields(QTextEdit** words)
 {
     this->words=words;
 }
 
 
-QTextEdit**::MainWindow::GetWordFields()
+QTextEdit**::Game::GetWordFields()
 {
     return this->words;
 }
 
 
-Word MainWindow::choseword()
-{
-    Filemanager *f= new Filemanager();
-    vector<Word>w=f->ReadFromDictionary();
-    int randomizer=rand()%w.size();
-    return w[randomizer];
-}
+//Word Game::choseword()
+//{
+//    Filemanager *f= new Filemanager();
+//    vector<Word>w=f->ReadFromDictionary();
+//    int randomizer=rand()%w.size();
+//    return w[randomizer];
+//}
 
 
- void MainWindow:: addLetters()
+ void Game:: addLetters()
 {
-    QTextEdit** temp_word_fields =initfields(currentword->GetWord().size());
+    QTextEdit** temp_word_fields =IT->initfields(DE,currentword->GetWord().size(),ui->word_field);
     SetWordFields(temp_word_fields);
     ui->label->setText( currentword->GetClue() ) ;
  }
 
 
-void MainWindow:: guess(QString Text)
+void Game:: guess(QString Text)
 {
     QTextEdit** temp_word_fields=GetWordFields();
     Word* W=Getword();
@@ -242,34 +232,38 @@ void MainWindow:: guess(QString Text)
 }
 
 
-void MainWindow::NewGame()
+void Game::NewGame()
 {
+
     Clear_Word_field();
     Reset_Text_Board();
     Clear_ProgressBar();
     random_word();
     addLetters();
+    SetLvl();
+    attemps=IL->getAttemps();
+    max_attemps=IL->getMaxAttemps();
 
     win=false;
     over=false;
-    Normal_lvl();
+    //Normal_lvl();
     initProgressbar();
-    ui->label_2->setPixmap(QString::fromStdString(":Hpic/normal_lvl/H"+to_string(7-failed_attemps)+".png"));
+    ui->label_2->setPixmap(QString::fromStdString(":Hpic/normal_lvl/H"+to_string(max_attemps-attemps)+".png"));
 
 
 }
 
 
-void MainWindow:: SetNextHangmanImage()
+void Game:: SetNextHangmanImage()
 {
     if(!over)
     {
-        ui->label_2->setPixmap(QString::fromStdString(":Hpic/normal_lvl/H"+to_string(7-failed_attemps)+".png"));
+        ui->label_2->setPixmap(QString::fromStdString(":Hpic/"+IL->getName()+"/H"+to_string(max_attemps-attemps)+".png"));
     }
 }
 
 
-void MainWindow::Clear_Word_field()
+void Game::Clear_Word_field()
 {
     if (ui->word_field) {
         while(ui->word_field->count() > 0){
@@ -281,7 +275,7 @@ void MainWindow::Clear_Word_field()
         }
     }
 }
-void MainWindow::Clear_ProgressBar()
+void Game::Clear_ProgressBar()
 {
     if (ui->PB) {
         while(ui->PB->count() > 0){
@@ -295,72 +289,47 @@ void MainWindow::Clear_ProgressBar()
 }
 
 
-void MainWindow::Reset_Text_Board()
+void Game::Reset_Text_Board()
 {
     ui->Text_Board->setText("");
     QString initial_Text="Enter your guess letter:";
     ui->Text_Board->setText(initial_Text);
-    Decorate_Text_Box();
+    DE->decorateTextBoard(ui->Text_Board);
 
 }
 
 
-MainWindow::~MainWindow()
+Game::~Game()
 {
     delete ui;
 }
 
 
-void MainWindow::Decorate_Text_Box()
-{
-    ui->Text_Board->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-    "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-    "p, li { white-space: pre-wrap; }\n"
-    "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;\">\n"
-    "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-    "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">Enter your guess letter:</span></p></body></html>", Q_NULLPTR));
-}
 
 
-void MainWindow::NewGame_clicked()
+
+
+
+void Game::NewGame_clicked()
 {
     NewGame();
 }
 
 
-void MainWindow:: Normal_lvl()
-{
-    QPixmap *temp[8];
-    QString s;
-    failed_attemps=7;
-    int j=0;
-    for(int i=7;i>=0;i--)
-    {
-        temp[j] = load_Pic(QString(":Hpic/normal_lvl/H"+s.setNum(i)+".png"));
-        j++;
-    }
-    SetHangmanSteps(temp);
-}
+//void Game:: Normal_lvl()
+//{
+//    QPixmap *temp[8];
+//    QString s;
+//    max_attemps=7;
+//    attemps=7;
 
 
-void MainWindow::SetHangmanSteps(QPixmap** steps)
-{
-    this->hangman_steps=steps;
-}
+//}
 
 
-QPixmap* MainWindow::load_Pic(QString path)
-{
-    QPixmap *tempPixmap = new QPixmap(path);
-    if(tempPixmap->isNull())
-    {
-       exit(0);
-    }
-    return tempPixmap;
-}
 
 
-void MainWindow:: InitTemporary()
+void Game:: InitTemporary()
 {
     int size= currentword->GetWord().size();
     for (int i=0;i<size;i++)
@@ -370,7 +339,7 @@ void MainWindow:: InitTemporary()
 }
 
 
-void MainWindow:: CheckGameWin()
+void Game:: CheckGameWin()
 {
     qDebug()<<currentword->GetWord();
     qDebug()<<temporary_word;
@@ -381,24 +350,24 @@ void MainWindow:: CheckGameWin()
     }
 }
 
-void MainWindow:: WinGame()
+void Game:: WinGame()
 {
      ui->Text_Board->append("You Win :)  \n");
 }
 
 
-void MainWindow::failed_attempt()
+void Game::failed_attempt()
 {
-    failed_attemps-=1;
+    attemps-=1;
     SetNextHangmanImage();
     decrProgressbar();
 }
 
 
-void MainWindow:: CheckGameOver()
+void Game:: CheckGameOver()
 {
 
-    if(failed_attemps==0)
+    if(attemps==0)
     {
 
       GameOver();
@@ -409,32 +378,53 @@ void MainWindow:: CheckGameOver()
 }
 
 
-void MainWindow::GameOver()
+void Game::GameOver()
 {
     ui->Text_Board->append("Game Over :(  \n");
 }
 
 
-void MainWindow::initProgressbar()
+void Game::initProgressbar()
 {
     health_points=new QProgressBar;
 
-     health_points->setOrientation(Qt::Vertical);
-     health_points->setTextDirection(QProgressBar::BottomToTop);
-     qDebug()<<failed_attemps;
-     health_points->setRange(0, failed_attemps);
-     health_points->setValue(failed_attemps);
-     health_points->setTextVisible(false);
-     health_points->setStyleSheet("::chunk {""background-color: red}");
+     DE->decoreteProgressBar(health_points,attemps);
      ui->PB->insertWidget(0,health_points);
 }
 
-void MainWindow::decrProgressbar()
+void Game::decrProgressbar()
 {
 
- health_points->setValue(failed_attemps);
+ health_points->setValue(attemps);
 
 
 }
+   void Game:: setTemporary(QString text)
+   {
+       this->temporary_word=text;
+   }
+void Game::SetWord( Word *word)
+   {
+       this->currentword=word;
+   }
+void Game::SetLvl()
+{
+ if(ui->Lvl->currentText()=="Easy")
+ {
+     IL=new EasyLvl();
+ }
+ else
+ {
+     if(ui->Lvl->currentText()=="Normal")
+     {
+         IL=new NormalLvl();
+     }
+     else {
+         IL=new HardLvl();
+     }
 
+ }
+
+
+}
 

@@ -25,14 +25,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
     word.cpp \
-    filemanager.cpp
+    filemanager.cpp \
+    image.cpp \
+    decorate.cpp \
+    game.cpp \
+    init.cpp \
+    ilvl.cpp \
+    normallvl.cpp \
+    easylvl.cpp \
+    hardlvl.cpp
 
 HEADERS += \
-        mainwindow.h \
     word.h \
-    filemanager.h
+    filemanager.h \
+    image.h \
+    decorate.h \
+    game.h \
+    init.h \
+    ilvl.h \
+    normallvl.h \
+    easylvl.h \
+    hardlvl.h
 
 FORMS += \
         mainwindow.ui

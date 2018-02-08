@@ -10,5 +10,19 @@
         <file>Hpic/normal_lvl/H5.png</file>
         <file>Hpic/normal_lvl/H6.png</file>
         <file>Hpic/normal_lvl/H7.png</file>
+        <file>Hpic/easy_lvl/H1.png</file>
+        <file>Hpic/hard_Lvl/H0.png</file>
+        <file>Hpic/easy_lvl/H0.png</file>
+        <file>Hpic/easy_lvl/H2.png</file>
+        <file>Hpic/easy_lvl/H3.png</file>
+        <file>Hpic/easy_lvl/H4.png</file>
+        <file>Hpic/easy_lvl/H5.png</file>
+        <file>Hpic/easy_lvl/H6.png</file>
+        <file>Hpic/easy_lvl/H7.png</file>
+        <file>Hpic/easy_lvl/H8.png</file>
+        <file>Hpic/easy_lvl/H9.png</file>
+        <file>Hpic/easy_lvl/H10.png</file>
+        <file>Hpic/hard_Lvl/H1.png</file>
+        <file>Hpic/hard_Lvl/H2.png</file>
     </qresource>
 </RCC>
