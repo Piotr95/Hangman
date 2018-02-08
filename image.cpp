@@ -13,10 +13,4 @@ QPixmap* Image::load_Pic(QString path)
     }
     return tempPixmap;
 }
-//void Image:: SetNextHangmanImage()
-//{
-//    if(!over)
-//    {
-//        //ui->label_2->setPixmap(QString::fromStdString(":Hpic/normal_lvl/H"+to_string(max_attemps-attemps)+".png"));
-//    }
-//}
+

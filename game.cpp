@@ -76,6 +76,7 @@ Game::Game(QWidget *parent) :
     NewGame();
 }
 
+
 void Game::random_word()
 {
    this->currentword=new Word( IT->choseword());
@@ -123,22 +124,6 @@ void Game::Bback_clicked()
 }
 
 
-
-
-//QTextEdit** Game::initfields( int size_off_word)
-//{
-//     QTextEdit** words = new QTextEdit*[size_off_word];
-//     for( int i=0;i<size_off_word;i++)
-//     {
-//        words[i]=new QTextEdit();
-//        DE->decorateLetter(words[i]);
-//        words[i]->show();
-//        ui->word_field->addWidget(words[i]);
-//     }
-//     return words;
-//}
-
-
 void::Game::SetWordFields(QTextEdit** words)
 {
     this->words=words;
@@ -149,15 +134,6 @@ QTextEdit**::Game::GetWordFields()
 {
     return this->words;
 }
-
-
-//Word Game::choseword()
-//{
-//    Filemanager *f= new Filemanager();
-//    vector<Word>w=f->ReadFromDictionary();
-//    int randomizer=rand()%w.size();
-//    return w[randomizer];
-//}
 
 
  void Game:: addLetters()
@@ -226,7 +202,7 @@ void Game:: guess(QString Text)
         else
         {
             failed_attempt();
-            ui->Text_Board->append(" Word don't contains this letters try again :)  \n");
+            ui->Text_Board->append(" Word doesn't contain this letters try again :)  \n");
             CheckGameOver();
         }
     }
